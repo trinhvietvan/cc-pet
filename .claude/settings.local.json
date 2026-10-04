@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm hooks/owl.ts)",
+      "Bash(claude plugin *)"
+    ]
+  }
+}

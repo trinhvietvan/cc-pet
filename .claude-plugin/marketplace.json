@@ -1,0 +1,19 @@
+{
+  "name": "cc-pet",
+  "owner": {
+    "name": "trinhvietvan"
+  },
+  "metadata": {
+    "description": "ASCII pet companion for Claude Code",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "cc-pet",
+      "source": "./",
+      "description": "A tiny ASCII pet above the prompt — 20 to pick from with /pet — that blinks, thinks and reacts to tool calls.",
+      "category": "fun",
+      "tags": ["pet", "ascii", "owl", "animation", "companion", "catppuccin"]
+    }
+  ]
+}
