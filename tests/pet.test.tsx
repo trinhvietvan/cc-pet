@@ -18,8 +18,8 @@ const BAND = {
   view: {},
 }
 
-test('there are twenty pets', async () => {
-  expect(SPECIES.length).toBe(20)
+test('there are thirty-two pets', async () => {
+  expect(SPECIES.length).toBe(32)
 })
 
 test('every pet keeps its width and its eyes in every pose', async () => {
@@ -65,10 +65,10 @@ test('a pet in profile winks with its one eye', async () => {
   expect(rowText(petRows(PETS.duck, 'idle', 'wink', 0)[1]!)).toBe(' <(- )___')
 })
 
-test('owl wings flap on odd frames only while a tool runs', async () => {
-  expect(rowText(petRows(PETS.owl, 'tool', 'open', 1)[2]!)).toBe('/(   )\\')
-  expect(rowText(petRows(PETS.owl, 'tool', 'open', 0)[2]!)).toBe(' (   ) ')
-  expect(rowText(petRows(PETS.owl, 'thinking', 'open', 1)[2]!)).toBe(' (   ) ')
+test('owl sways on odd frames only while a tool runs', async () => {
+  expect(rowText(petRows(PETS.owl, 'tool', 'open', 1)[0]!)).toBe('   {O,O}')
+  expect(rowText(petRows(PETS.owl, 'tool', 'open', 0)[0]!)).toBe('  {O,O} ')
+  expect(rowText(petRows(PETS.owl, 'thinking', 'open', 1)[0]!)).toBe('  {o,O} ')
 })
 
 test('caption names the running tool and cycles thinking dots', async () => {
@@ -81,8 +81,8 @@ test('caption names the running tool and cycles thinking dots', async () => {
 test('draws the idle owl above the prompt', async $ => {
   for (const surface of ['terminal', 'desktop'] as const) {
     const ui = await $.ui.mount({ plugin: 'cc-pet', surface, component: 'AbovePrompt', props: BAND })
-    expect(await ui.find({ type: 'Text', text: /,_,/ })).toBeDefined()
-    expect(await ui.find({ type: 'Text', text: /\(O,O\)/ })).toBeDefined()
+    expect(await ui.find({ type: 'Text', text: /\/\)_\)/ })).toBeDefined()
+    expect(await ui.find({ type: 'Text', text: /\{O,O\}/ })).toBeDefined()
     await ui.unmount()
   }
 })
@@ -98,7 +98,7 @@ test('/pet lists the pets, swaps one in and picks at random', async ($, on) => {
 
   const ui = await $.ui.mount({ plugin: 'cc-pet', surface: 'terminal', component: 'AbovePrompt', props: BAND })
   expect(await ui.find({ type: 'Text', text: /\( O\.O \)/ })).toBeDefined()
-  expect(await ui.find({ type: 'Text', text: /,_,/ })).toBeUndefined()
+  expect(await ui.find({ type: 'Text', text: /\/\)_\)/ })).toBeUndefined()
   await ui.unmount()
 
   const unknown = await $.command.run({ command: 'pet', args: 'dragon' })
@@ -114,7 +114,7 @@ test('the pet picked last session moves back in', async ($, on) => {
   on('session.start', ($, e) => ({ cwd: e.cwd }))
   await $.session.start({ cwd: '/work', surface: 'terminal', isInteractive: true })
   const ui = await $.ui.mount({ plugin: 'cc-pet', surface: 'terminal', component: 'AbovePrompt', props: BAND })
-  expect(await ui.find({ type: 'Text', text: /\\ v \// })).toBeDefined()
+  expect(await ui.find({ type: 'Text', text: /\/_\\~~~/ })).toBeDefined()
   await ui.unmount()
 })
 
@@ -131,6 +131,6 @@ test('yields the band to a survey', async ($, on) => {
     props: { ...BAND, hasSurvey: true },
   })
   expect(await ui.find({ type: 'Text', text: 'survey' })).toBeDefined()
-  expect(await ui.find({ type: 'Text', text: /,_,/ })).toBeUndefined()
+  expect(await ui.find({ type: 'Text', text: /\/\)_\)/ })).toBeUndefined()
   await ui.unmount()
 })

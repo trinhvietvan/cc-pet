@@ -11,7 +11,7 @@
     {
       "name": "cc-pet",
       "source": "./",
-      "description": "A tiny ASCII pet above the prompt — 20 to pick from with /pet — that blinks, thinks and reacts to tool calls.",
+      "description": "A tiny ASCII pet above the prompt — 32 to pick from with /pet — that blinks, thinks and reacts to tool calls.",
       "category": "fun",
       "tags": ["pet", "ascii", "owl", "animation", "companion", "catppuccin"]
     }

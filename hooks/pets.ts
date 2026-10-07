@@ -27,15 +27,15 @@ function pet(species: PetSpecies, label: string, art: string): Pet {
 
 export const PETS: Record<PetSpecies, Pet> = {
   owl: pet('owl', 'Owl', String.raw`
-  ,_,  #       #
- (E,E) #       #
- (   ) #/(   )\#
- -"-"- #       #
+  {E,E} #   {E,E}#
+  /)_)  #        #
+——" "—— #        #
 `),
   cat: pet('cat', 'Cat', String.raw`
- /\_/\ #       #
-( E.E )#       #
- > ^ < # > ^ <~#
+ /\_/\   #         #
+( E.E )  #         #
+ > ^ <   #         #
+(_____)~ #(_____)~~#
 `),
   dog: pet('dog', 'Dog', String.raw`
  /^ ^\ #       #
@@ -49,9 +49,10 @@ V\ Y /V#       #
 o(")(")#       #
 `),
   bear: pet('bear', 'Bear', String.raw`
-()___()#       #
-( E E )#       #
- \_w_/ #o\_w_/o#
+ c  .-.  C #           #
+( E  .  E )#           #
+(   ww    )#(d  ww    )#
+  d|   |b  #   |   |b  #
 `),
   frog: pet('frog', 'Frog', String.raw`
   _   _  #         #
@@ -77,10 +78,10 @@ o(")(")#       #
 = \__/ =#=-\__/-=#
 `),
   fox: pet('fox', 'Fox', String.raw`
-/\   /\#       #
-\ E E /#       #
- \ v / #       #
-  \_/  #  \_/~~#
+ /\  /\ #        #
+( E.E  )#        #
+ > ^ <  #        #
+  /_\~~~#  /_\~~>#
 `),
   chick: pet('chick', 'Chick', String.raw`
   ,,,  #       #
@@ -136,6 +137,78 @@ o(")(")#       #
  [ E E ] #         #
  [_===_] #         #
   /|_|\  #         #
+`),
+  raven: pet('raven', 'Raven', String.raw`
+<(E)    #        #
+ (\ \_  # (\\ \_ #
+  \\//  #        #
+--" "---#        #
+`),
+  wolf: pet('wolf', 'Wolf', String.raw`
+ _Λ/ᐠ      #           #
+(E   |__  )#           #
+ \\  /   - #           #
+ |  |  ||  #  | |  ||  #
+`),
+  deer: pet('deer', 'Deer', String.raw`
+\Y/  \Y/#        #
+ (E v E)#        #
+ /| |\  # /|_|\  #
+_/   \_ #        #
+`),
+  labrador: pet('labrador', 'Labrador', String.raw`
+   __/\  #         #
+ __/E )  #         #
+O     \  #         #
+ U \___\-#UU \___\~#
+`),
+  dolphin: pet('dolphin', 'Dolphin', String.raw`
+ _.-~E) #        #
+<(   ^ /#        #
+ \_.  / #        #
+        #    \   #
+`),
+  beaver: pet('beaver', 'Beaver', String.raw`
+ n____n #        #
+(E    E)#        #
+( >TT< )#(=>TT<=)#
+ ${'`'}----' #        #
+`),
+  elephant: pet('elephant', 'Elephant', String.raw`
+ __  ___ #         #
+( E  |  )#         #
+ \ |_  | #         #
+ _) |__| # _) |_ | #
+`),
+  lion: pet('lion', 'Lion', String.raw`
+{*|_W_|*}#         #
+( E   E )#         #
+{ = ^ = }#{ = V = }#
+ * *~~* *#         #
+`),
+  golden: pet('golden', 'Golden', String.raw`
+  . " .  #         #
+ /|E  E|\#         #
+{/(_0_)\}#         #
+  " " "  #  " " "~~#
+`),
+  panda: pet('panda', 'Panda', String.raw`
+  n __ n  #          #
+ / E  E \ #          #
+ (  ww  ) # (  ====) #
+( --  -- )#( ||  || )#
+`),
+  cheetah: pet('cheetah', 'Cheetah', String.raw`
+ /\_/\  ~ # /\_/\~~~~#
+(E . E)   #          #
+ >.v.<    #          #
+/|'.|\    #_/' .\_   #
+`),
+  parrot: pet('parrot', 'Parrot', String.raw`
+   ,__  #        #
+ >(E  ) #~>(E  )~#
+  \\__/ #        #
+   |||  #        #
 `),
 }
 

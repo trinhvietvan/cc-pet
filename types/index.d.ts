@@ -26,6 +26,18 @@ export type PetSpecies =
   | 'bat'
   | 'ghost'
   | 'robot'
+  | 'raven'
+  | 'wolf'
+  | 'deer'
+  | 'labrador'
+  | 'dolphin'
+  | 'beaver'
+  | 'elephant'
+  | 'lion'
+  | 'golden'
+  | 'panda'
+  | 'cheetah'
+  | 'parrot'
 
 declare module 'claude-code' {
   interface PluginState {

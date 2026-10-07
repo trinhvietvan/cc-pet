@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-cc-pet is a Claude Code plugin built on **function hooks**, an early-access API (built and tested on Claude Code 2.1.289; it can change between releases). It draws an animated ASCII pet in the `AbovePrompt` band and lets the user swap among 20 pets with `/pet`.
+cc-pet is a Claude Code plugin built on **function hooks**, an early-access API (built and tested on Claude Code 2.1.289; it can change between releases). It draws an animated ASCII pet in the `AbovePrompt` band and lets the user swap among 32 pets with `/pet`.
 
 ## Commands
 
@@ -31,7 +31,7 @@ There is no package.json or build step: the engine loads `hooks/register.tsx` di
 
 1. Add the name to `PetSpecies` in `types/index.d.ts`.
 2. Draw the pet in `PETS` in `hooks/pets.ts`.
-3. Update the count in the `there are twenty pets` test.
+3. Update the count in the `there are thirty-two pets` test.
 
 The tests check width, eye count and that every pet moves while a tool runs, across every mood, eye state and frame.
 

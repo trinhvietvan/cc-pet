@@ -1,36 +1,43 @@
 # cc-pet
 
-A tiny ASCII pet that lives in the band above the Claude Code prompt. It blinks while you type, thinks while Claude thinks, moves while tools run, and cheers when the turn is done. The owl moves in first; 19 more are a `/pet` away.
+A tiny ASCII pet that lives in the band above the Claude Code prompt. It blinks while you type, thinks while Claude thinks, moves while tools run, and cheers when the turn is done. The owl moves in first; 31 more are a `/pet` away.
 
 ```
-  ,_,
- (O,O)    working
-/(   )\   Bash
- -"-"-
+   {O,O}   working
+  /)_)     Bash
+——" "——
 ```
 
 | Mood | When | Looks like |
 | --- | --- | --- |
-| idle | waiting for you | `(O,O)`, blinks every few seconds, sometimes winks `(O,-)` |
-| thinking | a turn is running | `(o,O)` glancing sideways, `thinking...` dots cycling |
-| working | a tool is running | wings flap `/(   )\`, the tool's name beside it |
-| done | the turn answered | `(^,^)` in green for 3 s |
-| oops | a tool or the turn failed | `(x,x)` with a red body |
+| idle | waiting for you | `{O,O}`, blinks every few seconds, sometimes winks `{O,-}` |
+| thinking | a turn is running | `{o,O}` glancing sideways, `thinking...` dots cycling |
+| working | a tool is running | sways side to side, the tool's name beside it |
+| done | the turn answered | `{^,^}` in green for 3 s |
+| oops | a tool or the turn failed | `{x,x}` with a red body |
 
 ## Pets
 
 | Pet | While a tool runs | Pet | While a tool runs |
 | --- | --- | --- | --- |
-| owl | flaps its wings | duck | paddles |
-| cat | swishes its tail | turtle | walks |
-| dog | pants | snail | leaves a trail |
-| rabbit | perks its ears | crab | snaps its claws |
-| bear | raises its paws | octopus | wiggles its arms |
-| frog | croaks | fish | blows bubbles |
-| penguin | flaps its flippers | bat | folds its wings |
-| pig | curls its tail | ghost | wobbles |
-| mouse | twitches its whiskers | robot | blinks its antenna |
-| fox | swishes its tail | chick | flaps its wings |
+| owl | sways side to side | robot | blinks its antenna |
+| cat | swishes its tail | raven | ruffles its wing |
+| dog | pants | wolf | walks |
+| rabbit | perks its ears | deer | grazes |
+| bear | waves a paw | labrador | pants |
+| frog | croaks | dolphin | splashes its tail |
+| penguin | flaps its flippers | beaver | gnaws |
+| pig | curls its tail | elephant | stomps |
+| mouse | twitches its whiskers | lion | roars |
+| fox | flicks its tail | golden | wags its tail |
+| chick | flaps its wings | panda | eats bamboo |
+| duck | paddles | cheetah | sprints |
+| turtle | walks | parrot | flaps its wings |
+| snail | leaves a trail | crab | snaps its claws |
+| octopus | wiggles its arms | fish | blows bubbles |
+| bat | folds its wings | ghost | wobbles |
+
+The owl, cat, bear and fox, and the twelve pets from raven on, are drawn after [petsonality](https://github.com/nanami-he/petsonality) (MIT).
 
 ```
 /pet            list the pets
@@ -71,7 +78,7 @@ claude plugin test /path/to/cc-pet      # runs tests/*.test.tsx against the engi
 | File | What it is |
 | --- | --- |
 | `hooks/register.tsx` | the hooks: mood from `turn.start` / `tool.call` / `turn.complete`, the blink loop, the `/pet` command, and the `AbovePrompt` drawing |
-| `hooks/pets.ts` | the 20 pets: each one's art at rest and while a tool runs, `E` marking its eyes |
+| `hooks/pets.ts` | the 32 pets: each one's art at rest and while a tool runs, `E` marking its eyes |
 | `hooks/sprite.ts` | turns a pet into rows for a mood, eyes and frame, plus the caption |
 | `types/index.d.ts` | the plugin's state contract (`species`, `mood`, `eyes`, `tool`, `frame`) |
 
