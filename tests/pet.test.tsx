@@ -66,9 +66,10 @@ test('a pet in profile winks with its one eye', async () => {
 })
 
 test('owl sways on odd frames only while a tool runs', async () => {
-  expect(rowText(petRows(PETS.owl, 'tool', 'open', 1)[0]!)).toBe('   {O,O}')
-  expect(rowText(petRows(PETS.owl, 'tool', 'open', 0)[0]!)).toBe('  {O,O} ')
-  expect(rowText(petRows(PETS.owl, 'thinking', 'open', 1)[0]!)).toBe('  {o,O} ')
+  expect(rowText(petRows(PETS.owl, 'tool', 'open', 1)[0]!)).toBe('   \\   /')
+  expect(rowText(petRows(PETS.owl, 'tool', 'open', 1)[1]!)).toBe('   {O,O}')
+  expect(rowText(petRows(PETS.owl, 'tool', 'open', 0)[1]!)).toBe('  {O,O} ')
+  expect(rowText(petRows(PETS.owl, 'thinking', 'open', 1)[1]!)).toBe('  {o,O} ')
 })
 
 test('caption names the running tool and cycles thinking dots', async () => {

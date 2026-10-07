@@ -3,6 +3,7 @@
 A tiny ASCII pet that lives in the band above the Claude Code prompt. It blinks while you type, thinks while Claude thinks, moves while tools run, and cheers when the turn is done. The owl moves in first; 31 more are a `/pet` away.
 
 ```
+   \   /
    {O,O}   working
   /)_)     Bash
 ——" "——
@@ -17,6 +18,58 @@ A tiny ASCII pet that lives in the band above the Claude Code prompt. It blinks 
 | oops | a tool or the turn failed | `{x,x}` with a red body |
 
 ## Pets
+
+All 32 at rest:
+
+```
+  \   /        /\_/\         /^ ^\
+  {O,O}       ( O.O )       / O O \        (\(\
+  /)_)         > ^ <        V\ Y /V        (O.O)
+——" "——       (_____)~       / - \        o(")(")
+owl           cat           dog           rabbit
+
+ c  .-.  C      _   _         ___          ^    ^
+( O  .  O )    (O)-(O)       (O>O)        ( O  O )
+(   ww    )   (  ___  )      ( : )        ( (oo) )
+  d|   |b      \_____/        ^ ^          "    "
+bear          frog          penguin       pig
+
+               /\  /\         ,,,            __
+(_)  (_)      ( O.O  )       (OvO)         <(O )___
+ (O  O)        > ^ <         (   )          ( ._> /
+= \__/ =        /_\~~~        ^ ^            '---'
+mouse         fox           chick         duck
+
+                            (\/)   (\/)
+   ____        O O  .--.     \_O___O_/      .---.
+ _/____\(O)    \ /_( @ )     /(_____)\     ( O O )
+  "    "       (________)    / /   \ \     ~/~|~\~
+turtle        snail         crab          octopus
+
+                             .---.           _|_
+   ____        /\ ^ ^ /\    ( O O )        [ O O ]
+\ /  O \      /  (O O)  \   |  o  |        [_===_]
+/ \____/      \/\/ v \/\/   '^'^'^'         /|_|\
+fish          bat           ghost         robot
+
+<(O)           _Λ/ᐠ         \Y/  \Y/         __/\
+ (\ \_        (O   |__  )    (O v O)       __/O )
+  \\//         \\  /   -     /| |\        O     \
+--" "---       |  |  ||     _/   \_        U \___\-
+raven         wolf          deer          labrador
+
+ _.-~O)        n____n        __  ___      {*|_W_|*}
+<(   ^ /      (O    O)      ( O  |  )     ( O   O )
+ \_.  /       ( >TT< )       \ |_  |      { = ^ = }
+               `----'        _) |__|       * *~~* *
+dolphin       beaver        elephant      lion
+
+  . " .         n __ n       /\_/\  ~        ,__
+ /|O  O|\      / O  O \     (O . O)        >(O  )
+{/(_0_)\}      (  ww  )      >.v.<          \\__/
+  " " "       ( --  -- )    /|'.|\           |||
+golden        panda         cheetah       parrot
+```
 
 | Pet | While a tool runs | Pet | While a tool runs |
 | --- | --- | --- | --- |
