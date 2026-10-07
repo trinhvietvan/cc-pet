@@ -3,7 +3,7 @@
 A tiny ASCII pet that lives in the band above the Claude Code prompt. It blinks while you type, thinks while Claude thinks, moves while tools run, and cheers when the turn is done. The owl moves in first; 31 more are a `/pet` away.
 
 ```
-   \   /
+   \^^^/
    {O,O}   working
   /)_)     Bash
 ——" "——
@@ -22,7 +22,7 @@ A tiny ASCII pet that lives in the band above the Claude Code prompt. It blinks 
 All 32 at rest:
 
 ```
-  \   /        /\_/\         /^ ^\
+  \~~~/        /\_/\         /^ ^\
   {O,O}       ( O.O )       / O O \        (\(\
   /)_)         > ^ <        V\ Y /V        (O.O)
 ——" "——       (_____)~       / - \        o(")(")

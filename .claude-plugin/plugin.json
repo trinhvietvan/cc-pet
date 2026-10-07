@@ -1,6 +1,6 @@
 {
   "name": "cc-pet",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A tiny ASCII pet (owl, cat, dog and 29 more) that lives above the Claude Code prompt — blinks, thinks and reacts to tool calls.",
   "author": { "name": "trinhvietvan" },
   "repository": "https://github.com/trinhvietvan/cc-pet",
