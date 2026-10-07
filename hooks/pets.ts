@@ -27,7 +27,7 @@ function pet(species: PetSpecies, label: string, art: string): Pet {
 
 export const PETS: Record<PetSpecies, Pet> = {
   owl: pet('owl', 'Owl', String.raw`
-  \~~~/ #   \^^^/#
+  \,,,/ #   \___/#
   {E,E} #   {E,E}#
   /)_)  #        #
 ——" "—— #        #
@@ -36,7 +36,7 @@ export const PETS: Record<PetSpecies, Pet> = {
  /\_/\   #         #
 ( E.E )  #         #
  > ^ <   #         #
-(_____)~ #(_____)~~#
+(_m_m_)~ #(_m_m_)~~#
 `),
   dog: pet('dog', 'Dog', String.raw`
  /^ ^\ #       #

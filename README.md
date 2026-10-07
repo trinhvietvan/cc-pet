@@ -22,10 +22,10 @@ A tiny ASCII pet that lives in the band above the Claude Code prompt. It blinks 
 All 32 at rest:
 
 ```
-  \~~~/        /\_/\         /^ ^\
+  \,,,/        /\_/\         /^ ^\
   {O,O}       ( O.O )       / O O \        (\(\
   /)_)         > ^ <        V\ Y /V        (O.O)
-——" "——       (_____)~       / - \        o(")(")
+——" "——       (_m_m_)~       / - \        o(")(")
 owl           cat           dog           rabbit
 
  c  .-.  C      _   _         ___          ^    ^
