@@ -53,6 +53,9 @@
   }
   .content div { white-space: pre; height: var(--content-character-height); }
   .content .b { color: var(--brand-color); }
+  .content canvas { display: none; }
+  .content.cells canvas { display: block; }
+  .content.cells div { display: none; }
 </style>
 </head>
 <body>
@@ -60,6 +63,10 @@
     <button data-size="small">small</button>
     <button data-size="tiny">tiny</button>
     <button data-size="xtiny">xtiny</button>
+    <span class="sep"></span>
+    <button data-charset="ascii">ascii</button>
+    <button data-charset="shade">░▒▓█</button>
+    <button data-charset="quadrant">▖▝▀▙</button>
     <span class="sep"></span>
     <button id="play">Pause</button>
   </div>
@@ -83,20 +90,94 @@ const content = document.getElementById('content');
 const info = document.getElementById('info');
 const playBtn = document.getElementById('play');
 const rows = Array.from({ length: 41 }, () => content.appendChild(document.createElement('div')));
+const canvas = content.appendChild(document.createElement('canvas'));
+const ctx = canvas.getContext('2d');
+
+// The frames use a density ramp. At small cell sizes those glyphs blur into each other, so the
+// other charsets re-encode each frame with block elements, which terminals such as Ghostty draw
+// themselves to fill the whole cell instead of taking them from the font.
+const RAMP = ' ·~ox+=*%@$';
+const SHADE = ' ░░░▒▒▓▓███'; // one glyph per ramp level
+const QUAD = ' ▘▝▀▖▌▞▛▗▚▐▜▄▙▟█'; // index = TL | TR << 1 | BL << 2 | BR << 3
+const COLS = 100;
+const GRID = FRAMES.map(lines => lines.map(line => {
+  const levels = [], blue = [];
+  for (const part of line.split(/(<span class="b">.*?<\/span>)/)) {
+    const b = part.startsWith('<span');
+    for (const ch of part.replace(/<[^>]*>/g, '')) { levels.push(Math.max(0, RAMP.indexOf(ch)) / 10); blue.push(b); }
+  }
+  return { levels, blue };
+}));
+// Each quadrant takes a weighted average of its cell and the three neighbours it touches, then a
+// threshold, so edges come out a quarter cell finer than the source grid.
+function quadrant(grid, x, y) {
+  const at = (xx, yy) => grid[Math.min(Math.max(yy, 0), grid.length - 1)].levels[Math.min(Math.max(xx, 0), COLS - 1)] ?? 0;
+  let bits = 0;
+  for (let q = 0; q < 4; q++) {
+    const dx = q & 1 ? 1 : -1, dy = q & 2 ? 1 : -1;
+    const v = (9 * at(x, y) + 3 * at(x + dx, y) + 3 * at(x, y + dy) + at(x + dx, y + dy)) / 16;
+    if (v >= 0.4) bits |= 1 << q;
+  }
+  return QUAD[bits];
+}
+const CHARSETS = {
+  shade: GRID.map(g => g.map(r => ({ text: r.levels.map(v => SHADE[Math.round(v * 10)]).join(''), blue: r.blue }))),
+  quadrant: GRID.map(g => g.map((r, y) => ({ text: r.levels.map((_, x) => quadrant(g, x, y)).join(''), blue: r.blue }))),
+};
+// How the terminal fills a cell for each glyph: [x0, y0, x1, y1, alpha] in cell fractions.
+const SHAPES = { '░': [[0, 0, 1, 1, 0.25]], '▒': [[0, 0, 1, 1, 0.5]], '▓': [[0, 0, 1, 1, 0.75]] };
+[...QUAD].forEach((g, bits) => {
+  SHAPES[g] = [0, 1, 2, 3].filter(q => bits & (1 << q))
+    .map(q => [(q & 1) / 2, (q >> 1) / 2, (q & 1) / 2 + 0.5, (q >> 1) / 2 + 0.5, 1]);
+});
+const COLORS = {};
 
 let size = 'small';
 try { size = localStorage.getItem('ghostty-size') || size; } catch {}
 if (!SIZES[size]) size = 'small';
+let charset = 'ascii';
+try { charset = localStorage.getItem('ghostty-charset') || charset; } catch {}
+if (charset !== 'ascii' && !CHARSETS[charset]) charset = 'ascii';
 
 let frame = 16; // the home page starts on frame 16
 let playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 let last = -1;
 
+function drawCells(s) {
+  const dpr = devicePixelRatio || 1;
+  const w = Math.round(COLS * s.cw * dpr), h = Math.round(rows.length * s.ch * dpr);
+  if (canvas.width !== w || canvas.height !== h) {
+    canvas.width = w; canvas.height = h;
+    canvas.style.width = COLS * s.cw + 'px'; canvas.style.height = rows.length * s.ch + 'px';
+  }
+  if (!COLORS.fg) {
+    const css = getComputedStyle(document.documentElement);
+    COLORS.fg = css.getPropertyValue('--gray-6').trim();
+    COLORS.blue = css.getPropertyValue('--brand-color').trim();
+  }
+  ctx.clearRect(0, 0, w, h);
+  // Snap every cell edge to a device pixel so neighbouring cells meet without seams.
+  const X = f => Math.round(f * s.cw * dpr), Y = f => Math.round(f * s.ch * dpr);
+  CHARSETS[charset][frame].forEach((row, y) => {
+    for (let x = 0; x < row.text.length; x++) {
+      const shape = SHAPES[row.text[x]];
+      if (!shape) continue;
+      ctx.fillStyle = row.blue[x] ? COLORS.blue : COLORS.fg;
+      for (const [x0, y0, x1, y1, a] of shape) {
+        ctx.globalAlpha = a;
+        ctx.fillRect(X(x + x0), Y(y + y0), X(x + x1) - X(x + x0), Y(y + y1) - Y(y + y0));
+      }
+    }
+  });
+  ctx.globalAlpha = 1;
+}
 function draw() {
-  const lines = FRAMES[frame];
-  for (let i = 0; i < rows.length; i++) rows[i].innerHTML = lines[i] ?? '';
   const s = SIZES[size];
-  info.textContent = size + ' · ' + s.font + 'px font · cell ' + s.cw + ' × ' + s.ch + ' px · art ' +
+  if (charset === 'ascii') {
+    const lines = FRAMES[frame];
+    for (let i = 0; i < rows.length; i++) rows[i].innerHTML = lines[i] ?? '';
+  } else drawCells(s);
+  info.textContent = size + ' · ' + charset + ' · ' + s.font + 'px font · cell ' + s.cw + ' × ' + s.ch + ' px · art ' +
     Math.round(100 * s.cw) + ' × ' + Math.round(41 * s.ch) + ' px · frame ' + (frame + 1) + '/' + FRAMES.length;
 }
 function setSize(next) {
@@ -115,9 +196,18 @@ function tick(time) {
   } else last = -1;
   requestAnimationFrame(tick);
 }
+function setCharset(next) {
+  charset = next;
+  content.classList.toggle('cells', charset !== 'ascii');
+  document.querySelectorAll('[data-charset]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.charset === charset)));
+  try { localStorage.setItem('ghostty-charset', charset); } catch {}
+  draw();
+}
 document.querySelectorAll('[data-size]').forEach(b => b.addEventListener('click', () => setSize(b.dataset.size)));
+document.querySelectorAll('[data-charset]').forEach(b => b.addEventListener('click', () => setCharset(b.dataset.charset)));
 playBtn.addEventListener('click', () => { playing = !playing; playBtn.textContent = playing ? 'Pause' : 'Play'; });
 playBtn.textContent = playing ? 'Pause' : 'Play';
+setCharset(charset);
 setSize(size);
 requestAnimationFrame(tick);
 </script>
